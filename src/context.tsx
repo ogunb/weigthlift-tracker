@@ -9,7 +9,7 @@ const initialStore = {
 };
 const Context = React.createContext(initialStore);
 
-const reducer = (state: object = {}, action: object) => {
+const reducer = (state: AppState, action: Action) => {
 	// switch (action.type) {
 	// 	default:
 	// 		return state;
@@ -17,15 +17,16 @@ const reducer = (state: object = {}, action: object) => {
 };
 
 export class Provider extends Component {
-	state = {
+	state: AppState = {
 		user: {
 			trainings: {},
 			bestTraining: {}
 		},
-		dispatch: (action: object) => {
-			this.setState(state => reducer(state, action));
+		dispatch: action => {
+			this.setState((state: AppState) => reducer(state, action));
 		}
 	};
+
 	componentDidMount() {
 		// TODO: ileride username'e değiştirilecek
 		base.syncState(`ogun`, {
