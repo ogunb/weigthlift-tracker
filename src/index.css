@@ -1,10 +1,22 @@
+body {
+	padding-bottom: 50px;
+}
 .icon {
 	height: 50px;
-	padding: 10px;
+	padding: 15px 0 5px 0;
+}
+.icon-reverse {
+	transform: rotate(180deg);
 }
 .loading {
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+}
+.trainingDayWrapper .card-body h4 {
+	cursor: pointer;
+}
+.card {
+	margin-bottom: 20px;
 }

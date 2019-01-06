@@ -10,7 +10,7 @@ const PyramidExercise = (props: Props) => {
 	const { exercise, weightAndRep, index } = props;
 	return (
 		<tr>
-			<td className="text-capitalize">{exercise}</td>
+			<td className="text-capitalize font-weight-bold">{exercise}</td>
 			<td>{weightAndRep[0]}kg</td>
 			<td>{weightAndRep[1]}</td>
 			<td>Piramit {index + 1}</td>

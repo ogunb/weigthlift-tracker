@@ -4,7 +4,6 @@ import { ReactComponent as Loading } from './assets/loading.svg';
 
 const initialStore = {
 	user: {
-		lastTrainDay: '0',
 		trainings: {},
 		bestTraining: {}
 	}
@@ -21,7 +20,6 @@ const reducer = (state: AppState, action: Action) => {
 export class Provider extends Component {
 	state: AppState = {
 		user: {
-			lastTrainDay: '0',
 			trainings: {},
 			bestTraining: {}
 		},
@@ -38,7 +36,7 @@ export class Provider extends Component {
 		});
 	}
 	render() {
-		if (this.state.user.lastTrainDay === '0') {
+		if (!this.state.user.trainings) {
 			return <Loading className="loading" />;
 		}
 		return (

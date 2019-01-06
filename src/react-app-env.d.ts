@@ -2,7 +2,6 @@
 
 type AppState = {
 	user: {
-		lastTrainDay: string;
 		trainings: TrainingsType;
 		bestTraining: {
 			[key: string]: string;
