@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { dateToDisplay } from '../utils';
+import PyramidExercise from './PyramidExercise';
 
 type LastTrainingProps = {
 	lastTrainDay: number;
@@ -32,17 +33,17 @@ export class LastTraining extends Component<LastTrainingProps> {
 									if (currExercise.isPyramid) {
 										return currExercise.sets.map(
 											(weightAndRep: [number, number], index: number) => (
-												<tr>
-													<td className="text-capitalize">{exercise}</td>
-													<td>{weightAndRep[0]}kg</td>
-													<td>{weightAndRep[1]}</td>
-													<td>Piramit {index + 1}</td>
-												</tr>
+												<PyramidExercise
+													exercise={exercise}
+													weightAndRep={weightAndRep}
+													index={index}
+													key={`${exercise}${index}`}
+												/>
 											)
 										);
 									}
 									return (
-										<tr>
+										<tr key={exercise}>
 											<td className="text-capitalize">{exercise}</td>
 											<td>{currExercise.sets[0][0]}kg</td>
 											<td>{currExercise.sets[0][1]}</td>
