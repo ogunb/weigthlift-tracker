@@ -1,4 +1,4 @@
-export function dateToDisplay(newDate: string) {
+export function dateToDisplay(newDate: number) {
 	const options = {
 		year: 'numeric',
 		month: 'long',
@@ -8,7 +8,7 @@ export function dateToDisplay(newDate: string) {
 	const date = new Date(newDate);
 	return date.toLocaleDateString('tr-TR', options);
 }
-export function dateToData(newDate: string) {
+export function dateToData(newDate: number) {
 	const date = new Date(newDate);
 	return date.getTime();
 }

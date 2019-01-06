@@ -1,18 +1,30 @@
 /// <reference types="react-scripts" />
 
-interface AppState {
+type AppState = {
 	user: {
-		trainings: {
-			[key: string]: [][];
-		};
+		lastTrainDay: number;
+		trainings: TrainingsType;
 		bestTraining: {
 			[key: string]: string;
 		};
 	};
 	dispatch: (action: Action) => void;
-}
+};
 
-interface Action {
+type TrainingsType = {
+	[index: string]: TrainingTypes;
+};
+
+type TrainingTypes = {
+	[index: string]: exercise;
+};
+
+type exercise = {
+	sets: [array];
+	isPyramid: boolean;
+};
+
+type Action = {
 	type: string;
-	payload: object;
-}
+	payload: object | array;
+};

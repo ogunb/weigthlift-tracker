@@ -1,16 +1,31 @@
 import React, { Component } from 'react';
+import { Consumer } from '../context';
 import LastTraining from './LastTraining';
 import Training from './Training';
 
-class AddTraining extends Component {
+class Trainings extends Component {
 	render() {
 		return (
-			<div className="container">
-				<LastTraining />
-				<Training />
-			</div>
+			<Consumer>
+				{value => {
+					const {
+						lastTrainDay,
+						trainings
+					}: { lastTrainDay: any; trainings: TrainingsType } = value.user;
+					const lastTrainingObject: TrainingTypes = trainings[lastTrainDay];
+					return (
+						<div className="container">
+							<LastTraining
+								lastTrainDay={lastTrainDay}
+								training={lastTrainingObject}
+							/>
+							<Training />
+						</div>
+					);
+				}}
+			</Consumer>
 		);
 	}
 }
 
-export default AddTraining;
+export default Trainings;
