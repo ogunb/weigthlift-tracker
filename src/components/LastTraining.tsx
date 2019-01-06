@@ -14,11 +14,11 @@ export class LastTraining extends Component<LastTrainingProps> {
 			<>
 				<h1 className="text-center mt-3">son antrenman</h1>
 				<div className="row card">
-					<div className="card-body">
+					<div className="card-body table-responsive-sm">
 						<h3 className="card-title text-center">
 							{dateToDisplay(lastTrainDay)}
 						</h3>
-						<table className="table table-sm">
+						<table className="table table-striped table-bordered mt-4">
 							<thead>
 								<tr>
 									<th>Antrenman</th>

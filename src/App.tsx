@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Provider } from './context';
 import Trainings from './components/Trainings';
-import dumbbell from './assets/dumbbell-solid.svg';
-import plus from './assets/plus-solid.svg';
+import { ReactComponent as Dumbbell } from './assets/dumbbell-solid.svg';
+import { ReactComponent as Plus } from './assets/plus-solid.svg';
+import { ReactComponent as BestTop } from './assets/best.svg';
 
 class App extends Component {
 	render() {
@@ -11,12 +12,15 @@ class App extends Component {
 				<div className="App container-fluid">
 					<h1 className="display-4 text-center">T R A C K E R</h1>
 					<Trainings />
-					<nav className="nav nav-pills d-flex flex-row justify-content-around fixed-bottom">
-						<a className="" href="#">
-							<img src={dumbbell} alt="antrenmanlar" className="icon" />
+					<nav className="d-flex fixed-bottom justify-content-around">
+						<a href="#" className="text-dark">
+							<Dumbbell className="icon" />
 						</a>
-						<a className="" href="#">
-							<img src={plus} alt="yeni antrenman" className="icon" />
+						<a href="#" className="text-dark">
+							<BestTop className="icon" />
+						</a>
+						<a href="#" className="text-dark">
+							<Plus className="icon" />
 						</a>
 					</nav>
 				</div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import base, { firebaseApp } from './base';
-import loading from './assets/loading.gif';
+import { ReactComponent as Loading } from './assets/loading.svg';
 
 const initialStore = {
 	user: {
@@ -39,7 +39,7 @@ export class Provider extends Component {
 	}
 	render() {
 		if (this.state.user.lastTrainDay === '0') {
-			return <img src={loading} alt="loading..." className="loading" />;
+			return <Loading className="loading" />;
 		}
 		return (
 			<Context.Provider value={this.state}>
