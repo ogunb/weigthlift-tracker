@@ -1,4 +1,4 @@
-export function dateToDisplay(newDate: number) {
+export function dateToDisplay(newDate: string): string {
 	const options = {
 		year: 'numeric',
 		month: 'long',
@@ -8,7 +8,8 @@ export function dateToDisplay(newDate: number) {
 	const date = new Date(newDate);
 	return date.toLocaleDateString('tr-TR', options);
 }
-export function dateToData(newDate: number) {
-	const date = new Date(newDate);
-	return date.getTime();
+
+export function closestDate(dates: []): string {
+	const sortedDates = dates.sort();
+	return sortedDates[sortedDates.length - 1];
 }

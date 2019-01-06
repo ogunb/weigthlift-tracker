@@ -3,7 +3,7 @@ import { dateToDisplay } from '../utils';
 import PyramidExercise from './PyramidExercise';
 
 type LastTrainingProps = {
-	lastTrainDay: number;
+	lastTrainDay: string;
 	training: TrainingTypes;
 };
 
