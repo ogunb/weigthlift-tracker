@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { dateToDisplay } from '../utils';
-import Training from './Training';
+import Workout from './Workout';
 
-type BestTrainingProps = {
-	training: TrainingTypes;
+type BestWorkoutProps = {
+	workout: WorkoutTypes;
 };
 
-export class BestTraining extends Component<BestTrainingProps> {
+export class BestWorkout extends Component<BestWorkoutProps> {
 	render() {
-		const { training } = this.props;
+		const { workout } = this.props;
 		return (
 			<>
 				<div className="row card">
 					<div className="card-body table-responsive-sm">
 						<h1 className="text-center mt-3">En İyi Antrenman</h1>
-						<Training training={training} />
+						<Workout workout={workout} />
 					</div>
 				</div>
 			</>
@@ -22,4 +22,4 @@ export class BestTraining extends Component<BestTrainingProps> {
 	}
 }
 
-export default BestTraining;
+export default BestWorkout;

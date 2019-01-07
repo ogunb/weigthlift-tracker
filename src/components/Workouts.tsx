@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { Provider } from '../context';
-import TrainingList from './TrainingList';
+import WorkoutList from './WorkoutList';
 import Nav from './Nav';
+import Header from './Header';
 
-function Trainings() {
+function Workouts() {
 	return (
 		<Provider>
 			<div className="App container-fluid">
-				<h1 className="display-4 text-center">T R A C K E R</h1>
 				<div className="container">
+					<Header />
 					<h2 className="mb-3 mt-4 text-center">Tüm Antrenmanlar</h2>
-					<TrainingList />
+					<WorkoutList />
 				</div>
 				<Nav />
 			</div>
@@ -18,4 +19,4 @@ function Trainings() {
 	);
 }
 
-export default Trainings;
+export default Workouts;

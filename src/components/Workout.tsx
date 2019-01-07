@@ -2,11 +2,11 @@ import React from 'react';
 import PyramidExercise from './PyramidExercise';
 
 type Props = {
-	training: TrainingTypes;
+	workout: WorkoutTypes;
 };
 
-function Training(props: Props) {
-	const { training } = props;
+function Workout(props: Props) {
+	const { workout } = props;
 	return (
 		<div>
 			<table className="table table-sm table-striped table-bordered mt-4">
@@ -19,8 +19,8 @@ function Training(props: Props) {
 					</tr>
 				</thead>
 				<tbody>
-					{Object.keys(training).map(exercise => {
-						const currExercise = training[exercise];
+					{Object.keys(workout).map(exercise => {
+						const currExercise = workout[exercise];
 						if (currExercise.isPyramid) {
 							return currExercise.sets.map(
 								(weightAndRep: [number, number], index: number) => (
@@ -48,4 +48,4 @@ function Training(props: Props) {
 	);
 }
 
-export default Training;
+export default Workout;

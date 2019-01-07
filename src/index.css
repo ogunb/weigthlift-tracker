@@ -14,7 +14,7 @@ body {
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
-.trainingDayWrapper .card-body h4 {
+.workoutDayWrapper .card-body h4 {
 	cursor: pointer;
 }
 .card {

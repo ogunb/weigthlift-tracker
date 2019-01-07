@@ -2,8 +2,8 @@
 
 type AppState = {
 	user: {
-		trainings: TrainingsType;
-		bestTraining: {
+		workouts: WorkoutsType;
+		bestWorkout: {
 			[key: string]: string;
 		};
 	};
@@ -11,11 +11,11 @@ type AppState = {
 	auth: any;
 };
 
-type TrainingsType = {
-	[index: string]: TrainingTypes;
+type WorkoutsType = {
+	[index: string]: WorkoutTypes;
 };
 
-type TrainingTypes = {
+type WorkoutTypes = {
 	[index: string]: exercise;
 };
 
