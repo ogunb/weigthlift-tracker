@@ -8,6 +8,7 @@ type AppState = {
 		};
 	};
 	dispatch: (action: Action) => void;
+	auth: any;
 };
 
 type TrainingsType = {
