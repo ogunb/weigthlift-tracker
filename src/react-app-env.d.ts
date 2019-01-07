@@ -9,6 +9,7 @@ type AppState = {
 	};
 	dispatch: (action: Action) => void;
 	auth: any;
+	exercises: string[];
 };
 
 type WorkoutsType = {
