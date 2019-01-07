@@ -84,7 +84,7 @@ export class Provider extends Component {
 		// 		</>
 		// 	);
 		// }
-		// if (auth && user.trainings.hasOwnProperty('loading')) {
+		// if (auth && Object.prototype.hasOwnProperty.call(user.trainings, 'loading') {
 		// 	return <Loading className="loading" />;
 		// }
 		return (
