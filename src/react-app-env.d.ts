@@ -7,9 +7,8 @@ type AppState = {
 			[key: string]: string;
 		};
 	};
-	dispatch: (action: Action) => void;
+	dispatch?: (action: Action) => void;
 	auth: any;
-	exercises: string[];
 };
 
 type WorkoutsType = {

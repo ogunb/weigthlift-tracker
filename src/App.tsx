@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import Router from './router';
+import { Provider } from './context';
 
 class App extends Component {
 	render() {
-		return <Router />;
+		return (
+			<Provider>
+				<Router />
+			</Provider>
+		);
 	}
 }
 

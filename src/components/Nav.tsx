@@ -10,15 +10,15 @@ const Nav = () => {
 	}
 	return (
 		<nav className="d-flex fixed-bottom justify-content-around bg-dark">
+			<button className="btn btn-primary" onClick={signOut}>
+				Çıkış Yap
+			</button>
 			<Link to="/" className="text-light w-100 text-center">
 				<Dumbbell className="icon" />
 			</Link>
 			<Link to="/add" className="text-light w-100 text-center">
 				<Plus className="icon" />
 			</Link>
-			<button className="btn btn-primary" onClick={signOut}>
-				Çıkış Yap
-			</button>
 		</nav>
 	);
 };
