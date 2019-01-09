@@ -11,7 +11,7 @@ class RepsForm extends Component {
 					type="number"
 					className="form-control form-control-lg"
 					defaultValue="10"
-					// required
+					required
 				/>
 			</div>
 		);

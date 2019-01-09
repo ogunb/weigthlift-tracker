@@ -126,8 +126,8 @@ export class WorkoutForm extends Component<FormProp, FormState> {
 			id: 'exampleInputEmail1',
 			placeholder: 'Egzersiz ismini girin...',
 			value,
-			onChange: this.onChange
-			// required: true
+			onChange: this.onChange,
+			required: true
 		};
 		const theme = {
 			container: 'autosuggest',
@@ -159,7 +159,7 @@ export class WorkoutForm extends Component<FormProp, FormState> {
 						type="date"
 						className="form-control form-control-lg"
 						ref={this.date}
-						// required
+						required
 					/>
 				</div>
 				{isPyramid ? (
@@ -182,7 +182,7 @@ export class WorkoutForm extends Component<FormProp, FormState> {
 								value={defaultSet}
 								disabled
 								ref={this.set}
-								// required
+								required
 							/>
 						</div>
 						<button
@@ -211,7 +211,7 @@ export class WorkoutForm extends Component<FormProp, FormState> {
 							defaultValue={defaultSet + ''}
 							ref={this.set}
 							onChange={this.onSetChange}
-							// required
+							required
 						/>
 					</div>
 				)}
