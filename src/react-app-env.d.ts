@@ -12,14 +12,14 @@ interface AppState {
 }
 
 interface WorkoutsType {
-	[key: string]: WorkoutTypes;
+	[x: string]: WorkoutTypes;
 }
 
 interface WorkoutTypes {
-	[key: string]: exercise;
+	[x: string]: exercise;
 }
 
 interface exercise {
 	sets: number[][];
-	isPyramid: boolean;
+	isPyramid: boolean | null;
 }

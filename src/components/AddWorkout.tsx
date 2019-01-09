@@ -7,13 +7,13 @@ type AddWorkoutState = {
 	isPyramid: boolean | null;
 };
 
-export class AddWorkout extends Component<{}, AddWorkoutState> {
+export class AddWorkout extends Component<any, AddWorkoutState> {
 	state = {
 		isPyramid: null
 	};
 
 	changePyramid = (e: any) => {
-		if (e.target.dataset.pyramid) {
+		if (e.target.dataset.pyramid === 'true') {
 			this.setState({
 				isPyramid: true
 			});
@@ -24,15 +24,24 @@ export class AddWorkout extends Component<{}, AddWorkoutState> {
 		}
 	};
 
+	handleNewWorkout = (obj: WorkoutsType) => {
+		this.props.onNewWorkout(obj);
+		this.props.history.push('/');
+	};
+
 	render() {
 		const { isPyramid } = this.state;
+		const { onNewWorkout, history } = this.props;
 		if (isPyramid === false) {
 			return (
 				<>
 					<Header />
 					<div className="container">
 						<h3 className="text-center">Yeni Egzersiz</h3>
-						<WorkoutForm isPyramid={isPyramid} />
+						<WorkoutForm
+							isPyramid={isPyramid}
+							onNewWorkout={this.handleNewWorkout}
+						/>
 					</div>
 					<Nav />
 				</>
@@ -43,8 +52,8 @@ export class AddWorkout extends Component<{}, AddWorkoutState> {
 				<>
 					<Header />
 					<div className="container">
-						<h3 className="text-center">pyramid</h3>
-						<WorkoutForm isPyramid={isPyramid} />
+						<h3 className="text-center">Yeni Egzersiz</h3>
+						<WorkoutForm isPyramid={isPyramid} onNewWorkout={onNewWorkout} />
 					</div>
 					<Nav />
 				</>
@@ -59,14 +68,14 @@ export class AddWorkout extends Component<{}, AddWorkoutState> {
 						<button
 							className="btn btn-block btn-lg mt-3 btn-primary"
 							onClick={this.changePyramid}
-							data-pyramid="false"
+							data-pyramid={false}
 						>
 							Egzersiz Ekle
 						</button>
 						<button
 							className="btn btn-block btn-lg mt-3 btn-outline-danger"
 							onClick={this.changePyramid}
-							data-pyramid="true"
+							data-pyramid={true}
 						>
 							Piramit Egzersiz Ekle
 						</button>

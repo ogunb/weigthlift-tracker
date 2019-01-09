@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import firebase from 'firebase';
+import * as firebase from 'firebase/app';
+import 'firebase/database';
+import 'firebase/auth';
+import 'firebase/hosting';
 import base, { firebaseApp, authProvider } from './base';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import AllWorkouts from './components/AllWorkouts';
@@ -56,6 +59,19 @@ class App extends Component<{}, AppState> {
 		});
 	};
 
+	onNewWorkout = (newWorkout: WorkoutsType) => {
+		this.setState(prevState => ({
+			...prevState,
+			user: {
+				...prevState.user,
+				workouts: {
+					...prevState.user.workouts,
+					...newWorkout
+				}
+			}
+		}));
+	};
+
 	render() {
 		const {
 			auth,
@@ -81,7 +97,12 @@ class App extends Component<{}, AppState> {
 							path="/"
 							render={props => <AllWorkouts {...props} workouts={workouts} />}
 						/>
-						<Route path="/add" component={AddWorkout} />
+						<Route
+							path="/add"
+							render={props => (
+								<AddWorkout {...props} onNewWorkout={this.onNewWorkout} />
+							)}
+						/>
 					</Switch>
 				</Router>
 			</div>

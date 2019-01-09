@@ -33,13 +33,14 @@ type FormState = {
 };
 type FormProp = {
 	isPyramid: boolean | null;
+	onNewWorkout: (newWorkout: WorkoutsType) => void;
 };
 
 export class WorkoutForm extends Component<FormProp, FormState> {
 	state = {
 		value: '',
 		suggestions: [],
-		defaultSet: 2
+		defaultSet: 3
 	};
 
 	private date = createRef<HTMLInputElement>();
@@ -68,26 +69,34 @@ export class WorkoutForm extends Component<FormProp, FormState> {
 
 	submitForm = (e: React.FormEvent<HTMLFormElement>): void => {
 		e.preventDefault();
+		const { isPyramid, onNewWorkout } = this.props;
 		const exercise = this.state.value;
 		const date = this.date.current!.value;
-		const set = this.set.current!.value;
-		const weights = [];
-		const reps = [];
+		const sets = [];
 		for (let i = 0; i < this.state.defaultSet; i++) {
-			if (
-				!findDOMNode(this.refs['weight' + i]) ||
-				!findDOMNode(this.refs['rep' + i])
-			) {
-				break;
+			let weightInput, repInput;
+			if (isPyramid) {
+				weightInput = findDOMNode(this.refs['weight' + i])!
+					.lastChild as HTMLInputElement;
+				repInput = findDOMNode(this.refs['rep' + i])!
+					.lastChild as HTMLInputElement;
+			} else {
+				weightInput = findDOMNode(this.refs['weight0'])!
+					.lastChild as HTMLInputElement;
+				repInput = findDOMNode(this.refs['rep0'])!
+					.lastChild as HTMLInputElement;
 			}
-			const weightInput = findDOMNode(this.refs['weight' + i])!
-				.lastChild as HTMLInputElement;
-			const repInput = findDOMNode(this.refs['rep' + i])!
-				.lastChild as HTMLInputElement;
-			weights.push(weightInput.value);
-			reps.push(repInput.value);
+			sets.push([parseInt(weightInput.value), parseInt(repInput.value)]);
 		}
-		console.log(exercise, date, set, weights, reps);
+		const properWorkoutObj: WorkoutsType = {
+			[date]: {
+				[exercise]: {
+					sets,
+					isPyramid
+				}
+			}
+		};
+		onNewWorkout(properWorkoutObj);
 	};
 
 	onSetChange = (event: any, isPlus: boolean = false) => {
