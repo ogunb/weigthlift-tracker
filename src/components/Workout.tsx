@@ -1,12 +1,19 @@
 import React from 'react';
 import PyramidExercise from './PyramidExercise';
+import { ReactComponent as Remove } from '../assets/remove.svg';
 
 type Props = {
 	workout: WorkoutTypes;
+	removeExercise: removeExercise;
+	workoutDay: string;
 };
 
 function Workout(props: Props) {
-	const { workout } = props;
+	const { workout, removeExercise, workoutDay } = props;
+	function onRemove() {
+		const toRemove = Object.keys(workout)[0];
+		removeExercise(toRemove, workoutDay);
+	}
 	return (
 		<div>
 			<table className="table table-sm table-striped table-bordered mt-4">
@@ -16,6 +23,7 @@ function Workout(props: Props) {
 						<th>Ağırlık</th>
 						<th>Tekrar</th>
 						<th>Set</th>
+						<th />
 					</tr>
 				</thead>
 				<tbody>
@@ -29,6 +37,7 @@ function Workout(props: Props) {
 										weightAndRep={weightAndRep}
 										index={index}
 										key={`${exercise}${index}`}
+										onRemove={onRemove}
 									/>
 								)
 							);
@@ -39,6 +48,9 @@ function Workout(props: Props) {
 								<td>{currExercise.sets[0][0]}kg</td>
 								<td>{currExercise.sets[0][1]}</td>
 								<td>{currExercise.sets.length}</td>
+								<td>
+									<Remove className="remove" onClick={onRemove} />
+								</td>
 							</tr>
 						);
 					})}

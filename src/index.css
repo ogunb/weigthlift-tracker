@@ -20,3 +20,10 @@ body {
 .card {
 	margin-bottom: 20px;
 }
+.remove {
+	fill: #dc3545;
+	width: 20px;
+	display: flex;
+	margin: auto;
+	cursor: pointer;
+}

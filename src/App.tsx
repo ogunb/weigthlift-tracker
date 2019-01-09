@@ -85,6 +85,26 @@ class App extends Component<{}, AppState> {
 		});
 	};
 
+	removeExercise = (exercise: string, date: string) => {
+		const newWorkouts: WorkoutsType = { ...this.state.user.workouts };
+		const { auth } = this.state;
+		delete newWorkouts[date][exercise];
+		base.remove(`${auth}/workouts/${date}/${exercise}`);
+		if (!Object.keys(newWorkouts[date]).length) {
+			delete newWorkouts[date];
+			base.remove(`${auth}/workouts/${date}`);
+		}
+		this.setState(prevState => ({
+			...prevState,
+			user: {
+				...prevState.user,
+				workouts: {
+					...newWorkouts
+				}
+			}
+		}));
+	};
+
 	render() {
 		const {
 			auth,
@@ -113,6 +133,7 @@ class App extends Component<{}, AppState> {
 									{...props}
 									workouts={workouts}
 									signOut={this.onSignOut}
+									removeExercise={this.removeExercise}
 								/>
 							)}
 						/>

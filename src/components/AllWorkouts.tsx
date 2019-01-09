@@ -5,12 +5,14 @@ import WorkoutDay from './WorkoutDay';
 import Nav from './Nav';
 import Header from './Header';
 
+type Props = {
+	workouts: WorkoutsType;
+	history: any;
+	signOut: () => void;
+	removeExercise: removeExercise;
+};
 function AllWorkouts(props: any) {
-	const {
-		workouts,
-		signOut,
-		history
-	}: { workouts: WorkoutsType; history: any; signOut: () => void } = props;
+	const { workouts, signOut, history, removeExercise }: Props = props;
 	function handleSignOut() {
 		localStorage.removeItem('weightlifter');
 		firebase
@@ -34,6 +36,7 @@ function AllWorkouts(props: any) {
 									key={workoutDay}
 									workoutDay={workoutDay}
 									workout={workouts[workoutDay]}
+									removeExercise={removeExercise}
 								/>
 							);
 						})}

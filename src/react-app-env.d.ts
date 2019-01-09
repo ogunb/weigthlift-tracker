@@ -23,3 +23,5 @@ interface exercise {
 	sets: number[][];
 	isPyramid: boolean | null;
 }
+
+type removeExercise = (exercise: string, workoutDay: string) => void;
