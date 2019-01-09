@@ -12,11 +12,10 @@ export class AddWorkout extends Component<{}, AddWorkoutState> {
 		isPyramid: null
 	};
 
-	changePyramid = (e: React.MouseEvent<HTMLButtonElement>) => {
-		const button = e.target as HTMLButtonElement;
-		if (button.textContent!.includes('piramit')) {
+	changePyramid = (e: any) => {
+		if (e.target.dataset.pyramid) {
 			this.setState({
-				isPyramid: false
+				isPyramid: true
 			});
 		} else {
 			this.setState({
@@ -60,12 +59,14 @@ export class AddWorkout extends Component<{}, AddWorkoutState> {
 						<button
 							className="btn btn-block btn-lg mt-3 btn-primary"
 							onClick={this.changePyramid}
+							data-pyramid="false"
 						>
 							Egzersiz Ekle
 						</button>
 						<button
 							className="btn btn-block btn-lg mt-3 btn-outline-danger"
 							onClick={this.changePyramid}
+							data-pyramid="true"
 						>
 							Piramit Egzersiz Ekle
 						</button>

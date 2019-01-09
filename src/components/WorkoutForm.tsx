@@ -90,10 +90,11 @@ export class WorkoutForm extends Component<FormProp, FormState> {
 		console.log(exercise, date, set, weights, reps);
 	};
 
-	onSetPlus = (event: any) => {
+	onSetChange = (event: any, isPlus: boolean = false) => {
 		const defaultSet =
-			parseInt((event.target as HTMLInputElement).value) ||
-			this.state.defaultSet + 1;
+			parseInt((event.target as HTMLInputElement).value) || isPlus
+				? this.state.defaultSet + 1
+				: this.state.defaultSet - 1;
 		this.setState({
 			defaultSet
 		});
@@ -177,10 +178,17 @@ export class WorkoutForm extends Component<FormProp, FormState> {
 						</div>
 						<button
 							type="button"
-							onClick={this.onSetPlus}
+							onClick={e => this.onSetChange(e, true)}
 							className="btn btn-block btn-outline-warning btn-sm mt-2"
 						>
-							Add another set
+							Set ekle
+						</button>
+						<button
+							type="button"
+							onClick={e => this.onSetChange(e, false)}
+							className="btn btn-block btn-outline-danger btn-sm mt-2"
+						>
+							Set sil
 						</button>
 					</>
 				) : (
@@ -193,7 +201,7 @@ export class WorkoutForm extends Component<FormProp, FormState> {
 							className="form-control form-control-lg"
 							defaultValue={defaultSet + ''}
 							ref={this.set}
-							onChange={this.onSetPlus}
+							onChange={this.onSetChange}
 							// required
 						/>
 					</div>
