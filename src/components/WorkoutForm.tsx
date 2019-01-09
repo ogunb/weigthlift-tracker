@@ -1,7 +1,7 @@
 import React, { Component, createRef } from 'react';
 import { findDOMNode } from 'react-dom';
 import Autosuggest from 'react-autosuggest';
-import { Consumer, exercises } from '../context';
+import { exercises } from '../App';
 import WeightsForm from './WeightsForm';
 import RepsForm from './RepsForm';
 
@@ -32,10 +32,10 @@ type FormState = {
 	defaultSet: number;
 };
 type FormProp = {
-	isPyramid: boolean;
+	isPyramid: boolean | null;
 };
 
-export class WorkoutForm extends Component<any, FormState, FormProp> {
+export class WorkoutForm extends Component<FormProp, FormState> {
 	state = {
 		value: '',
 		suggestions: [],
@@ -45,7 +45,10 @@ export class WorkoutForm extends Component<any, FormState, FormProp> {
 	private date = createRef<HTMLInputElement>();
 	private set = createRef<HTMLInputElement>();
 
-	onChange = (e: any, { newValue }: { newValue: string }) => {
+	onChange = (
+		e: React.MouseEvent<HTMLElement>,
+		{ newValue }: { newValue: string }
+	) => {
 		this.setState({
 			value: newValue
 		});
@@ -63,10 +66,7 @@ export class WorkoutForm extends Component<any, FormState, FormProp> {
 		});
 	};
 
-	submitForm = (
-		e: React.MouseEvent<HTMLElement>,
-		dispatch: ((action: Action) => void) | undefined
-	): void => {
+	submitForm = (e: React.FormEvent<HTMLFormElement>): void => {
 		e.preventDefault();
 		const exercise = this.state.value;
 		const date = this.date.current!.value;
@@ -90,8 +90,10 @@ export class WorkoutForm extends Component<any, FormState, FormProp> {
 		console.log(exercise, date, set, weights, reps);
 	};
 
-	onSetPlus = (e: any) => {
-		const defaultSet = e.target.value || this.state.defaultSet + 1;
+	onSetPlus = (event: any) => {
+		const defaultSet =
+			parseInt((event.target as HTMLInputElement).value) ||
+			this.state.defaultSet + 1;
 		this.setState({
 			defaultSet
 		});
@@ -126,90 +128,80 @@ export class WorkoutForm extends Component<any, FormState, FormProp> {
 			suggestionFocused: 'active'
 		};
 		return (
-			<Consumer>
-				{context => {
-					const { dispatch } = context;
-					return (
-						<form onSubmit={(e: any) => this.submitForm(e, dispatch)}>
-							<div className="form-group">
-								<label htmlFor="egzersiz">Egzersiz</label>
-								<Autosuggest
-									suggestions={suggestions}
-									onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-									getSuggestionValue={getSuggestionValue}
-									onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-									renderSuggestion={renderSuggestion}
-									inputProps={inputProps}
-									theme={theme}
-								/>
+			<form onSubmit={this.submitForm}>
+				<div className="form-group">
+					<label htmlFor="egzersiz">Egzersiz</label>
+					<Autosuggest
+						suggestions={suggestions}
+						onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+						getSuggestionValue={getSuggestionValue}
+						onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+						renderSuggestion={renderSuggestion}
+						inputProps={inputProps}
+						theme={theme}
+					/>
+				</div>
+				<div className="input-group">
+					<div className="input-group-append">
+						<span className="input-group-text">Tarih</span>
+					</div>
+					<input
+						type="date"
+						className="form-control form-control-lg"
+						ref={this.date}
+						// required
+					/>
+				</div>
+				{isPyramid ? (
+					weightAndReps
+				) : (
+					<React.Fragment>
+						<WeightsForm ref={'weight0'} />
+						<RepsForm ref={'rep0'} />
+					</React.Fragment>
+				)}
+				{isPyramid ? (
+					<>
+						<div className="input-group mt-3">
+							<div className="input-group-append">
+								<span className="input-group-text">Set</span>
 							</div>
-							<div className="input-group">
-								<div className="input-group-append">
-									<span className="input-group-text">Tarih</span>
-								</div>
-								<input
-									type="date"
-									className="form-control form-control-lg"
-									ref={this.date}
-									// required
-								/>
-							</div>
-							{isPyramid ? (
-								weightAndReps
-							) : (
-								<React.Fragment>
-									<WeightsForm ref={'weight0'} />
-									<RepsForm ref={'rep0'} />
-								</React.Fragment>
-							)}
-							{isPyramid ? (
-								<>
-									<div className="input-group mt-3">
-										<div className="input-group-append">
-											<span className="input-group-text">Set</span>
-										</div>
-										<input
-											type="number"
-											className="form-control form-control-lg"
-											value={defaultSet}
-											disabled
-											ref={this.set}
-											// required
-										/>
-									</div>
-									<button
-										type="button"
-										onClick={this.onSetPlus}
-										className="btn btn-block btn-outline-warning btn-sm mt-2"
-									>
-										Add another set
-									</button>
-								</>
-							) : (
-								<div className="input-group mt-3">
-									<div className="input-group-append">
-										<span className="input-group-text">Set</span>
-									</div>
-									<input
-										type="number"
-										className="form-control form-control-lg"
-										defaultValue={defaultSet + ''}
-										ref={this.set}
-										onChange={this.onSetPlus}
-										// required
-									/>
-								</div>
-							)}
-							<button
-								type="submit"
-								className="btn btn-primary btn-block btn-lg mt-5"
-							>
-								Ekle
-							</button>
-						</form>
-					);
-				}}
-			</Consumer>
+							<input
+								type="number"
+								className="form-control form-control-lg"
+								value={defaultSet}
+								disabled
+								ref={this.set}
+								// required
+							/>
+						</div>
+						<button
+							type="button"
+							onClick={this.onSetPlus}
+							className="btn btn-block btn-outline-warning btn-sm mt-2"
+						>
+							Add another set
+						</button>
+					</>
+				) : (
+					<div className="input-group mt-3">
+						<div className="input-group-append">
+							<span className="input-group-text">Set</span>
+						</div>
+						<input
+							type="number"
+							className="form-control form-control-lg"
+							defaultValue={defaultSet + ''}
+							ref={this.set}
+							onChange={this.onSetPlus}
+							// required
+						/>
+					</div>
+				)}
+				<button type="submit" className="btn btn-primary btn-block btn-lg mt-5">
+					Ekle
+				</button>
+			</form>
 		);
 	}
 }

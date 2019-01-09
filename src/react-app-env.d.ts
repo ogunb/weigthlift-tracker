@@ -1,30 +1,25 @@
 /// <reference types="react-scripts" />
 
-type AppState = {
+interface AppState {
 	user: {
 		workouts: WorkoutsType;
 		bestWorkout: {
 			[key: string]: string;
 		};
+		loading: boolean;
 	};
-	dispatch?: (action: Action) => void;
-	auth: any;
-};
+	auth: boolean | null | string;
+}
 
-type WorkoutsType = {
-	[index: string]: WorkoutTypes;
-};
+interface WorkoutsType {
+	[key: string]: WorkoutTypes;
+}
 
-type WorkoutTypes = {
-	[index: string]: exercise;
-};
+interface WorkoutTypes {
+	[key: string]: exercise;
+}
 
-type exercise = {
-	sets: [array];
+interface exercise {
+	sets: number[][];
 	isPyramid: boolean;
-};
-
-type Action = {
-	type: string;
-	payload: object | array;
-};
+}

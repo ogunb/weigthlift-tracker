@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Consumer } from '../context';
 import Nav from './Nav';
 import Header from './Header';
 import WorkoutForm from './WorkoutForm';
@@ -8,13 +7,14 @@ type AddWorkoutState = {
 	isPyramid: boolean | null;
 };
 
-export class AddWorkout extends Component<any, AddWorkoutState> {
+export class AddWorkout extends Component<{}, AddWorkoutState> {
 	state = {
 		isPyramid: null
 	};
 
-	changePyramid = (e: any) => {
-		if (e.target.textContent.includes('piramit')) {
+	changePyramid = (e: React.MouseEvent<HTMLButtonElement>) => {
+		const button = e.target as HTMLButtonElement;
+		if (button.textContent!.includes('piramit')) {
 			this.setState({
 				isPyramid: false
 			});

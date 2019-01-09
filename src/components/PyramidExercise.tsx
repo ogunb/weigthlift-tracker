@@ -2,7 +2,7 @@ import React from 'react';
 
 type Props = {
 	exercise: string;
-	weightAndRep: [number, number];
+	weightAndRep: number[];
 	index: number;
 };
 

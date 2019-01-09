@@ -23,7 +23,7 @@ function Workout(props: Props) {
 						const currExercise = workout[exercise];
 						if (currExercise.isPyramid) {
 							return currExercise.sets.map(
-								(weightAndRep: [number, number], index: number) => (
+								(weightAndRep: number[], index: number) => (
 									<PyramidExercise
 										exercise={exercise}
 										weightAndRep={weightAndRep}
