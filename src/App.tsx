@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import * as firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
-import 'firebase/hosting';
 import base, { firebaseApp, authProvider } from './base';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import AllWorkouts from './components/AllWorkouts';
@@ -72,6 +71,20 @@ class App extends Component<{}, AppState> {
 		}));
 	};
 
+	onSignOut = () => {
+		const initialStore = {
+			user: {
+				workouts: {},
+				bestWorkout: {},
+				loading: false
+			},
+			auth: false
+		};
+		this.setState({
+			...initialStore
+		});
+	};
+
 	render() {
 		const {
 			auth,
@@ -95,7 +108,13 @@ class App extends Component<{}, AppState> {
 						<Route
 							exact
 							path="/"
-							render={props => <AllWorkouts {...props} workouts={workouts} />}
+							render={props => (
+								<AllWorkouts
+									{...props}
+									workouts={workouts}
+									signOut={this.onSignOut}
+								/>
+							)}
 						/>
 						<Route
 							path="/add"
@@ -113,95 +132,104 @@ class App extends Component<{}, AppState> {
 export default App;
 
 export const exercises = [
-	'Atlas Stones',
-	'Axle Deadlift',
-	'Barbell Deadlift',
-	'Barbell Full Squat',
-	'Barbell Glute Bridge',
-	'Barbell Hip Thrust',
-	'Barbell Walking Lunge',
-	'Barbell Row',
-	'Bottoms Up',
-	'Box Squat',
-	'Chin-Up',
-	'Clean Deadlift',
-	'Clean and Jerk',
-	'Clean and Press',
-	'Clean from Blocks',
-	'Close-Grip Barbell Bench Press',
-	'Cross-Body Crunch',
-	'Decline EZ Bar Triceps Extension',
-	'Decline Reverse Crunch',
-	'Deficit Deadlift',
-	'Dips - Triceps Version',
-	'Dumbbell Bench Press',
-	'Dumbbell Floor Press',
-	'Dumbbell Flyes',
-	'Dumbbell V-Sit Cross Jab',
-	'EZ-Bar Curl',
-	'Elbow to Knee',
-	"Farmer's Walk",
-	'Finger Curls',
-	'Floor Glute-Ham Raise',
-	'Front Squats With Two Kettlebells',
+	'Arnold Press',
+	'Dumbbell Front Squats',
+	'Barbell Front Squats',
+	'Barbell Lunges',
+	'Dumbbell Lunges',
+	'Dumbbell Preacher Curls',
+	'Barbell Preacher Curls',
+	'Barbell Romanian Deadlifts',
+	'Dumbbell Romanian Deadlifts',
+	'Dumbbell Split Squats',
+	'Barbell Split Squats',
+	'Barbell Squats',
+	'Dumbbell Squats',
+	'Dumbbell Step-Ups',
+	'Barbell Step-Ups',
+	'Barbell Straight Leg Deadlifts',
+	'Dumbbell Straight Leg Deadlifts',
+	'Dumbbell Sumo Deadlifts',
+	'Barbell Sumo Deadlifts',
+	'Barbell Shrugs',
+	'Machine Shrugs',
+	'Dumbbell Shrugs',
+	'Machine Upright Rows',
+	'Barbell Upright Rows',
+	'Dumbbell Upright Rows',
+	'Barbell Rear Delt Flyes',
+	'Barbell Rear Delt Raises',
+	'Barbell Rear Delt Rows',
+	'Machine Rear Delt Flyes',
+	'Machine Rear Delt Raises',
+	'Machine Rear Delt Rows',
+	'Dumbbell Rear Delt Flyes',
+	'Dumbbell Rear Delt Raises',
+	'Dumbbell Rear Delt Rows',
+	'Bench Dips',
+	'Bent Over Barbell Rows',
+	'Bent Over Dumbbell Rows',
+	'Biceps Curl Machine',
+	'Cable Crossovers/Cable Flyes',
+	'Cable Curls',
+	'Cable Press-Downs',
+	'Cable Pull-Throughs',
+	'Chest Supported Dumbbell Rows',
+	'Chest Supported Barbell Rows',
+	'Chest Supported Machine Rows',
+	'Chin-Ups',
+	'Close Grip Push-Ups',
+	'Concentration Curls',
+	'Decline Barbell Bench Press',
+	'Decline Dumbbell Bench Press',
+	'Decline Chest Press Machine',
+	'Decline Close Grip Bench Press',
+	'Decline Dumbbell Flyes',
+	'Dips',
+	'Dumbbell Front Raises',
+	'Machine Front Raises',
+	'Cable Front Raises',
+	'Dumbbell Lateral Raises',
+	'Cable Lateral Raises',
+	'Machine Lateral Raises',
+	'Flat Dumbbell Bench Press',
+	'Flat Barbell Bench Press',
+	'Flat Chest Press Machine',
+	'Flat Close Grip Bench Press',
+	'Flat Dumbbell Flyes',
+	'Glute-Ham Raises',
+	'Good-Mornings',
 	'Hammer Curls',
-	'Hang Clean',
-	'Hip Circles (prone)',
-	'Hyperextensions (Back Extensions)',
-	'Incline Dumbbell Press',
-	'Incline Hammer Curls',
-	"Landmine 180's",
-	'Leverage Shrug',
-	'Lying Face Down Plate Neck Resistance',
-	'Olympic Squat',
-	'One-Arm High-Pulley Cable Side Bends',
-	'One-Arm Kettlebell Push Press',
-	'One-Arm Medicine Ball Slam',
-	'One-Arm Side Laterals',
-	'Palms-Down Wrist Curl Over A Bench',
-	'Palms-Up Barbell Wrist Curl Over A Bench',
-	'Plank',
-	'Power Clean from Blocks',
-	'Power Partials',
-	'Power Snatch',
-	'Pullups',
-	'Push Press',
-	'Pushups',
-	'Reverse Band Box Squat',
-	'Reverse Flyes',
-	'Reverse Grip Bent-Over Rows',
-	'Rickshaw Carry',
-	'Romanian Deadlift With Dumbbells',
-	'Romanian Deadlift from Deficit',
-	'Rope Jumping',
-	'Seated Barbell Military Press',
-	'Seated Dumbbell Press',
-	'Seated Two-Arm Palms-Up Low-Pulley Wrist Curl',
-	'Side Laterals to Front Raise',
-	'Single Leg Push-off',
-	'Single-Arm Linear Jammer',
-	'Single-Leg Press',
-	'Smith Machine Calf Raise',
-	'Smith Machine Shrug',
-	'Snatch',
-	'Spell Caster',
-	'Spider Crawl',
-	'Spider Curl',
-	'Standing Cable Lift',
-	'Standing Dumbbell Straight-Arm Front Delt Raise Above Head',
-	'Standing Military Press',
-	'Standing Palm-In One-Arm Dumbbell Press',
-	'Standing Palms-In Dumbbell Press',
-	'Standing Palms-Up Barbell Behind The Back Wrist Curl',
-	'Sumo Deadlift',
-	'Suspended Fallout',
-	'T-Bar Row with Handle',
-	'Tire Flip',
-	'Triceps Pushdown - V-Bar Attachment',
-	'Weighted Bench Dip',
-	'Weighted Pull Ups',
-	'Wide-Grip Standing Barbell Curl',
-	'Wrist Roller',
-	'Wrist Rotations with Straight Bar',
-	'Zottman Curl'
+	'Hyperextensions',
+	'Incline Dumbbell Bench Press',
+	'Incline Barbell Bench Press',
+	'Incline Chest Press Machine',
+	'Incline Dumbbell Curls',
+	'Incline Dumbbell Flyes',
+	'Inverted Rows',
+	'Lat Pull-Downs (Chest)',
+	'Lat Pull-Downs (Back)',
+	'Laying Dumbbell Triceps Extensions',
+	'Laying Barbell Triceps Extensions',
+	'Leg Curls',
+	'Leg Extensions',
+	'Leg Press',
+	'Machine Squat/Hack Squat',
+	'Overhead Dumbbell Triceps Extensions',
+	'Overhead Barbell Triceps Extensions',
+	'Overhead Machine Press',
+	'Pec Deck Machine',
+	'Pull-Ups',
+	'Push-Ups',
+	'Seated Cable Rows',
+	'Seated Dumbbell Curls',
+	'Seated Overhead Barbell Press',
+	'Seated Overhead Dumbbell Press',
+	'Single Leg Press',
+	'Skull Crushers',
+	'Standing Dumbbell Curls',
+	'Standing Barbell Curls',
+	'Standing Overhead Dumbbell Press',
+	'Standing Overhead Barbell Press',
+	'T-Bar Rows'
 ];

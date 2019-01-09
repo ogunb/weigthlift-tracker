@@ -31,7 +31,7 @@ export class AddWorkout extends Component<any, AddWorkoutState> {
 
 	render() {
 		const { isPyramid } = this.state;
-		const { onNewWorkout, history } = this.props;
+		const { onNewWorkout } = this.props;
 		if (isPyramid === false) {
 			return (
 				<>

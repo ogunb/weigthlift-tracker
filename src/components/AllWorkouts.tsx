@@ -1,10 +1,24 @@
 import React, { Component } from 'react';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
 import WorkoutDay from './WorkoutDay';
 import Nav from './Nav';
 import Header from './Header';
 
 function AllWorkouts(props: any) {
-	const { workouts }: { workouts: WorkoutsType } = props;
+	const {
+		workouts,
+		signOut,
+		history
+	}: { workouts: WorkoutsType; history: any; signOut: () => void } = props;
+	function handleSignOut() {
+		localStorage.removeItem('weightlifter');
+		firebase
+			.auth()
+			.signOut()
+			.then(() => history.push('/'));
+		signOut();
+	}
 	if (workouts) {
 		return (
 			<div className="container-fluid">
@@ -24,7 +38,7 @@ function AllWorkouts(props: any) {
 							);
 						})}
 				</div>
-				<Nav />
+				<Nav signOut={handleSignOut} />
 			</div>
 		);
 	}
