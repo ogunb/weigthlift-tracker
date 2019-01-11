@@ -8,9 +8,12 @@ const Nav = (props: any) => {
 		props.signOut();
 	}
 	return (
-		<nav className="d-flex fixed-bottom justify-content-around bg-dark">
-			<button className="btn btn-dark" onClick={onSignOut}>
-				Çıkış Yap
+		<nav className="d-flex fixed-bottom justify-content-around bg-primary">
+			<button
+				className="btn btn-warning rounded-0 font-weight-bold"
+				onClick={onSignOut}
+			>
+				logout
 			</button>
 			<Link to="/" className="text-light w-100 text-center">
 				<Dumbbell className="icon" />

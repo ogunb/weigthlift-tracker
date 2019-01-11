@@ -1,8 +1,37 @@
+:root {
+	--blue: #69d5f0;
+	--primary: #69d5f0;
+	--yellow: #defc37;
+	--warning: #defc37;
+}
+.bg-primary {
+	background-color: #69d5f0 !important;
+}
+.bg-warning {
+	background-color: #defc37 !important;
+}
+.btn-primary {
+	background-color: #69d5f0 !important;
+	border-color: #69d5f0 !important;
+}
+.btn-warning {
+	border-color: #defc37 !important;
+	background-color: #defc37 !important;
+}
+.btn-outline-warning {
+	border-color: #defc37 !important;
+	color: var(--dark);
+}
+.btn-outline-warning:hover {
+	border-color: #defc37 !important;
+	background-color: #defc37 !important;
+}
 body {
 	padding-bottom: 75px;
+	font-family: 'Montserrat', sans-serif;
 }
 .icon {
-	height: 50px;
+	height: 45px;
 	padding: 15px 0 5px 0;
 }
 .icon-reverse {
@@ -14,16 +43,21 @@ body {
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
-.workoutDayWrapper .card-body h4 {
-	cursor: pointer;
-}
 .card {
 	margin-bottom: 20px;
 }
 .remove {
-	fill: #dc3545;
-	width: 20px;
+	fill: var(--pink);
+	width: 15px;
 	display: flex;
 	margin: auto;
 	cursor: pointer;
+	transition: fill 300ms ease-in-out;
+}
+.remove:hover {
+	fill: var(--red);
+}
+.table th,
+.table td {
+	vertical-align: middle !important;
 }

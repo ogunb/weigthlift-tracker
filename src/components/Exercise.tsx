@@ -1,29 +1,26 @@
 import React from 'react';
 import { ReactComponent as Remove } from '../assets/remove.svg';
-
 type Props = {
 	exercise: string;
-	weightAndRep: number[];
-	index: number;
+	currExercise: exercise;
 	onRemove: (exercise: string) => void;
 };
-
-const PyramidExercise = (props: Props) => {
-	const { exercise, weightAndRep, index, onRemove } = props;
+function Exercise(props: Props) {
+	const { exercise, currExercise, onRemove } = props;
 	function onClick() {
 		onRemove(exercise);
 	}
 	return (
-		<tr>
+		<tr key={exercise}>
 			<td className="text-capitalize font-weight-bold">{exercise}</td>
-			<td>{weightAndRep[0]}kg</td>
-			<td>{weightAndRep[1]}</td>
-			<td>Piramit {index + 1}</td>
+			<td>{currExercise.sets[0][0]}kg</td>
+			<td>{currExercise.sets[0][1]}</td>
+			<td>{currExercise.sets.length}</td>
 			<td>
 				<Remove className="remove" onClick={onClick} />
 			</td>
 		</tr>
 	);
-};
+}
 
-export default PyramidExercise;
+export default Exercise;

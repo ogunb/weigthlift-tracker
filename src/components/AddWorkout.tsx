@@ -31,7 +31,6 @@ export class AddWorkout extends Component<any, AddWorkoutState> {
 
 	render() {
 		const { isPyramid } = this.state;
-		const { onNewWorkout } = this.props;
 		if (isPyramid === false) {
 			return (
 				<>
@@ -53,7 +52,10 @@ export class AddWorkout extends Component<any, AddWorkoutState> {
 					<Header />
 					<div className="container">
 						<h3 className="text-center">Yeni Egzersiz</h3>
-						<WorkoutForm isPyramid={isPyramid} onNewWorkout={onNewWorkout} />
+						<WorkoutForm
+							isPyramid={isPyramid}
+							onNewWorkout={this.handleNewWorkout}
+						/>
 					</div>
 					<Nav />
 				</>

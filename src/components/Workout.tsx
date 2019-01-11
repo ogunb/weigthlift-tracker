@@ -1,4 +1,5 @@
 import React from 'react';
+import Exercise from './Exercise';
 import PyramidExercise from './PyramidExercise';
 import { ReactComponent as Remove } from '../assets/remove.svg';
 
@@ -10,9 +11,8 @@ type Props = {
 
 function Workout(props: Props) {
 	const { workout, removeExercise, workoutDay } = props;
-	function onRemove() {
-		const toRemove = Object.keys(workout)[0];
-		removeExercise(toRemove, workoutDay);
+	function onRemove(exercise: string) {
+		removeExercise(exercise, workoutDay);
 	}
 	return (
 		<div>
@@ -43,15 +43,12 @@ function Workout(props: Props) {
 							);
 						}
 						return (
-							<tr key={exercise}>
-								<td className="text-capitalize font-weight-bold">{exercise}</td>
-								<td>{currExercise.sets[0][0]}kg</td>
-								<td>{currExercise.sets[0][1]}</td>
-								<td>{currExercise.sets.length}</td>
-								<td>
-									<Remove className="remove" onClick={onRemove} />
-								</td>
-							</tr>
+							<Exercise
+								key={exercise}
+								exercise={exercise}
+								currExercise={workout[exercise]}
+								onRemove={onRemove}
+							/>
 						);
 					})}
 				</tbody>
