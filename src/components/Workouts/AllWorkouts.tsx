@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import WorkoutDay from './WorkoutDay';
-import Nav from './Nav';
-import Header from './Header';
+import Nav from '../Nav';
+import Header from '../Header';
 
 type Props = {
 	workouts: WorkoutsType;

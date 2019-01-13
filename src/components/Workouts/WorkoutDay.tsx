@@ -1,5 +1,5 @@
 import React from 'react';
-import { dateToDisplay } from '../utils';
+import { dateToDisplay } from '../../utils';
 import Workout from './Workout';
 
 type Props = {

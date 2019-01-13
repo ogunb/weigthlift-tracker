@@ -1,7 +1,7 @@
 import React, { Component, createRef } from 'react';
 import { findDOMNode } from 'react-dom';
 import Autosuggest from 'react-autosuggest';
-import { exercises } from '../App';
+import { exercises } from '../../App';
 import WeightsForm from './WeightsForm';
 import RepsForm from './RepsForm';
 

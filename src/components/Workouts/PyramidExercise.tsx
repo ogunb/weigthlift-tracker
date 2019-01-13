@@ -1,5 +1,5 @@
 import React from 'react';
-import { ReactComponent as Remove } from '../assets/remove.svg';
+import { ReactComponent as Remove } from '../../assets/remove.svg';
 
 type Props = {
 	exercise: string;

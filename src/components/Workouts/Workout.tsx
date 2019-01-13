@@ -1,7 +1,6 @@
 import React from 'react';
 import Exercise from './Exercise';
 import PyramidExercise from './PyramidExercise';
-import { ReactComponent as Remove } from '../assets/remove.svg';
 
 type Props = {
 	workout: WorkoutTypes;

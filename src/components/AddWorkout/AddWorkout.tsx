@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Nav from './Nav';
-import Header from './Header';
+import Nav from '../Nav';
+import Header from '../Header';
 import WorkoutForm from './WorkoutForm';
 
 type AddWorkoutState = {
