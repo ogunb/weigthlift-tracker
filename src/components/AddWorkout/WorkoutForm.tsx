@@ -10,16 +10,7 @@ const getSuggestions = (value: string): string[] => {
 	const inputLength = inputValue.length;
 	return inputLength === 0
 		? []
-		: exercises.filter((exercise: string) => {
-				const words = exercise.split(' ');
-				for (let i = 0; i < words.length; i++) {
-					const lowerCase: string = words[i].toLowerCase();
-					if (lowerCase.slice(0, inputLength) === inputValue) {
-						return true;
-					}
-				}
-				return false;
-		  });
+		: exercises.filter((ex: string) => ex.toLowerCase().includes(value));
 };
 
 const getSuggestionValue = (suggestion: string): string => suggestion;
