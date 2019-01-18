@@ -137,7 +137,9 @@ export class WorkoutForm extends Component<FormProp, FormState> {
 							onClick={this.onSuggestionClick}
 						>
 							{suggestions.map(suggestion => (
-								<li className="dropdown-item list-item">{suggestion}</li>
+								<li className="dropdown-item list-item" key={suggestion}>
+									{suggestion}
+								</li>
 							))}
 						</ul>
 					) : null}
