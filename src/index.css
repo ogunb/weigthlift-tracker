@@ -61,3 +61,11 @@ body {
 .table td {
 	vertical-align: middle !important;
 }
+.suggestions__dropdown {
+	background: var(--white);
+	position: absolute;
+	top: 100;
+	left: 0;
+	z-index: 99;
+	cursor: pointer;
+}

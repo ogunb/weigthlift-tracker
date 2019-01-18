@@ -1,21 +1,8 @@
 import React, { Component, createRef } from 'react';
 import { findDOMNode } from 'react-dom';
-import Autosuggest from 'react-autosuggest';
 import { exercises } from '../../App';
 import WeightsForm from './WeightsForm';
 import RepsForm from './RepsForm';
-
-const getSuggestions = (value: string): string[] => {
-	const inputValue = value.trim().toLowerCase();
-	const inputLength = inputValue.length;
-	return inputLength === 0
-		? []
-		: exercises.filter((ex: string) => ex.toLowerCase().includes(value));
-};
-
-const getSuggestionValue = (suggestion: string): string => suggestion;
-
-const renderSuggestion = (suggestion: string) => <div>{suggestion}</div>;
 
 type FormState = {
 	value: string;
@@ -25,6 +12,14 @@ type FormState = {
 type FormProp = {
 	isPyramid: boolean | null;
 	onNewWorkout: (newWorkout: WorkoutsType) => void;
+};
+
+const getSuggestions = (value: string): string[] => {
+	const inputValue = value.trim().toLowerCase();
+	const inputLength = inputValue.length;
+	return inputLength === 0
+		? []
+		: exercises.filter((ex: string) => ex.toLowerCase().includes(inputValue));
 };
 
 export class WorkoutForm extends Component<FormProp, FormState> {
@@ -37,12 +32,12 @@ export class WorkoutForm extends Component<FormProp, FormState> {
 	private date = createRef<HTMLInputElement>();
 	private set = createRef<HTMLInputElement>();
 
-	onChange = (
-		e: React.MouseEvent<HTMLElement>,
-		{ newValue }: { newValue: string }
-	) => {
+	onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { value } = e.target;
+		const suggestions = getSuggestions(value);
 		this.setState({
-			value: newValue
+			value,
+			suggestions
 		});
 	};
 
@@ -62,6 +57,7 @@ export class WorkoutForm extends Component<FormProp, FormState> {
 		e.preventDefault();
 		const { isPyramid, onNewWorkout } = this.props;
 		const exercise = this.state.value;
+		if (!exercises.includes(exercise)) return;
 		const date = this.date.current!.value;
 		const sets = [];
 		for (let i = 0; i < this.state.defaultSet; i++) {
@@ -100,6 +96,17 @@ export class WorkoutForm extends Component<FormProp, FormState> {
 		});
 	};
 
+	onSuggestionClick = (e: React.MouseEvent<HTMLUListElement, MouseEvent>) => {
+		const value: string | null = (e.target as HTMLElement).textContent;
+		if (value) {
+			const suggestions: [] = [];
+			this.setState({
+				value,
+				suggestions
+			});
+		}
+	};
+
 	render() {
 		const { suggestions, value, defaultSet } = this.state;
 		const { isPyramid } = this.props;
@@ -112,35 +119,28 @@ export class WorkoutForm extends Component<FormProp, FormState> {
 				</React.Fragment>
 			);
 		}
-		const inputProps = {
-			className: 'form-control form-control-lg',
-			id: 'exampleInputEmail1',
-			placeholder: 'Egzersiz ismini girin...',
-			value,
-			onChange: this.onChange,
-			required: true
-		};
-		const theme = {
-			container: 'autosuggest',
-			input: 'form-control',
-			suggestionsContainer: 'dropdown',
-			suggestionsList: `dropdown-menu ${suggestions.length ? 'show' : ''}`,
-			suggestion: 'dropdown-item',
-			suggestionFocused: 'active'
-		};
 		return (
 			<form onSubmit={this.submitForm}>
-				<div className="form-group">
+				<div className="form-group position-relative">
 					<label htmlFor="egzersiz">Egzersiz</label>
-					<Autosuggest
-						suggestions={suggestions}
-						onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-						getSuggestionValue={getSuggestionValue}
-						onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-						renderSuggestion={renderSuggestion}
-						inputProps={inputProps}
-						theme={theme}
+					<input
+						type="text"
+						className="form-control form-control-lg"
+						placeholder="Egzersiz ismini girin..."
+						value={value}
+						onChange={this.onChange}
+						required={true}
 					/>
+					{suggestions.length > 0 ? (
+						<ul
+							className="dropdown suggestions__dropdown list-group"
+							onClick={this.onSuggestionClick}
+						>
+							{suggestions.map(suggestion => (
+								<li className="dropdown-item list-item">{suggestion}</li>
+							))}
+						</ul>
+					) : null}
 				</div>
 				<div className="input-group">
 					<div className="input-group-append">
