@@ -22,7 +22,7 @@ function Workout(props: Props) {
 						<th>Ağırlık</th>
 						<th>Tekrar</th>
 						<th>Set</th>
-						<th />
+						<th>-</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -37,6 +37,7 @@ function Workout(props: Props) {
 										index={index}
 										key={`${exercise}${index}`}
 										onRemove={onRemove}
+										workoutDay={workoutDay}
 									/>
 								)
 							);
@@ -47,6 +48,7 @@ function Workout(props: Props) {
 								exercise={exercise}
 								currExercise={workout[exercise]}
 								onRemove={onRemove}
+								workoutDay={workoutDay}
 							/>
 						);
 					})}
