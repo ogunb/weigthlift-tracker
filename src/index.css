@@ -46,9 +46,16 @@ body {
 .card {
 	margin-bottom: 20px;
 }
+.remove-wrapper {
+	display: flex;
+	margin: auto;
+}
 .remove {
+	box-sizing: content-box;
 	fill: var(--pink);
 	width: 15px;
+	height: 25px;
+	padding: 5px;
 	display: flex;
 	margin: auto;
 	cursor: pointer;
@@ -68,4 +75,11 @@ body {
 	left: 0;
 	z-index: 99;
 	cursor: pointer;
+}
+.heading {
+	color: var(--dark);
+}
+.heading:hover {
+	text-decoration: none;
+	color: var(--dark);
 }

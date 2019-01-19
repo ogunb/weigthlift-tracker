@@ -6,6 +6,7 @@ import base, { firebaseApp, authProvider } from './base';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import AllWorkouts from './components/Workouts/AllWorkouts';
 import AddWorkout from './components/AddWorkout/AddWorkout';
+import EditWorkout from './components/EditWorkout/EditWorkout';
 import { ReactComponent as Loading } from './assets/loading.svg';
 import Login from './components/Login';
 import Header from './components/Header';
@@ -105,6 +106,20 @@ class App extends Component<{}, AppState> {
 		}));
 	};
 
+	handleEditWorkout = (
+		obj: WorkoutsType,
+		workoutName: string,
+		newWorkoutName: string,
+		date: string
+	): void => {
+		if (workoutName === newWorkoutName) {
+			this.onNewWorkout(obj);
+		} else {
+			this.removeExercise(workoutName, date);
+			this.onNewWorkout(obj);
+		}
+	};
+
 	render() {
 		const {
 			auth,
@@ -113,7 +128,7 @@ class App extends Component<{}, AppState> {
 		if (!auth) {
 			return (
 				<>
-					<Header />
+					<h1 className="display-4 text-center">TRACKER</h1>
 					<Login handleClick={this.handleClick} />
 				</>
 			);
@@ -141,6 +156,16 @@ class App extends Component<{}, AppState> {
 							path="/add"
 							render={props => (
 								<AddWorkout {...props} onNewWorkout={this.onNewWorkout} />
+							)}
+						/>
+						<Route
+							path="/edit/:day/:workout"
+							render={props => (
+								<EditWorkout
+									{...props}
+									handleEditWorkout={this.handleEditWorkout}
+									workouts={workouts}
+								/>
 							)}
 						/>
 					</Switch>
