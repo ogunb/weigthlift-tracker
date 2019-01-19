@@ -32,9 +32,11 @@ export class EditWorkout extends Component<any, EditWorkoutState> {
 		}
 	};
 
-	handleNewWorkout = (obj: WorkoutsType) => {
-		this.props.onNewWorkout(obj);
-		this.props.history.push('/');
+	handleNewWorkout = (obj: WorkoutsType, exercise: string) => {
+		const { handleEditWorkout, history } = this.props;
+		const { day, workout: workoutName } = this.props.match.params;
+		handleEditWorkout(obj, workoutName, exercise, day);
+		history.push('/');
 	};
 
 	render() {

@@ -106,6 +106,20 @@ class App extends Component<{}, AppState> {
 		}));
 	};
 
+	handleEditWorkout = (
+		obj: WorkoutsType,
+		workoutName: string,
+		newWorkoutName: string,
+		date: string
+	): void => {
+		if (workoutName === newWorkoutName) {
+			this.onNewWorkout(obj);
+		} else {
+			this.removeExercise(workoutName, date);
+			this.onNewWorkout(obj);
+		}
+	};
+
 	render() {
 		const {
 			auth,
@@ -149,7 +163,7 @@ class App extends Component<{}, AppState> {
 							render={props => (
 								<EditWorkout
 									{...props}
-									onNewWorkout={this.onNewWorkout}
+									handleEditWorkout={this.handleEditWorkout}
 									workouts={workouts}
 								/>
 							)}

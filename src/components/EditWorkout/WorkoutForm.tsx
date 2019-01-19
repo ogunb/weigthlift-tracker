@@ -14,7 +14,7 @@ type FormProp = {
 	workoutName: string;
 	workout: exercise;
 	isPyramid: boolean | null;
-	onNewWorkout: (newWorkout: WorkoutsType) => void;
+	onNewWorkout: (newWorkout: WorkoutsType, exercise: string) => void;
 };
 
 const getSuggestions = (value: string): string[] => {
@@ -97,7 +97,7 @@ export class WorkoutForm extends Component<FormProp, FormState> {
 				}
 			}
 		};
-		onNewWorkout(properWorkoutObj);
+		onNewWorkout(properWorkoutObj, exercise);
 	};
 
 	onSetChange = (event: any, isPlus: boolean = false) => {
