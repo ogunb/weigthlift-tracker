@@ -14,21 +14,25 @@ const WorkoutDay = (props: Props) => {
 	const filteredWorkouts = Object.keys(workout).filter(exercise =>
 		exercise.toLowerCase().includes(filterValue)
 	);
-	return (
-		<div className="workoutDayWrapper">
-			<div className="card">
-				<div className="card-body table-responsive-sm">
-					<h4 className="text-center">{dateToDisplay(workoutDay)}</h4>
-					<Workout
-						workout={workout}
-						workoutDay={workoutDay}
-						removeExercise={removeExercise}
-						filteredWorkouts={filteredWorkouts}
-					/>
+	let componentHasChildren = filteredWorkouts.length > 0 ? true : false;
+	if (componentHasChildren) {
+		return (
+			<div className="workoutDayWrapper">
+				<div className="card">
+					<div className="card-body table-responsive-sm">
+						<h4 className="text-center">{dateToDisplay(workoutDay)}</h4>
+						<Workout
+							workout={workout}
+							workoutDay={workoutDay}
+							removeExercise={removeExercise}
+							filteredWorkouts={filteredWorkouts}
+						/>
+					</div>
 				</div>
 			</div>
-		</div>
-	);
+		);
+	}
+	return null;
 };
 
 export default WorkoutDay;

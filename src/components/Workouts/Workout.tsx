@@ -11,9 +11,11 @@ type Props = {
 
 function Workout(props: Props) {
 	const { workout, removeExercise, workoutDay, filteredWorkouts } = props;
+
 	function onRemove(exercise: string) {
 		removeExercise(exercise, workoutDay);
 	}
+
 	return (
 		<div>
 			<table className="table table-sm table-striped table-bordered mt-4">
