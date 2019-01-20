@@ -6,10 +6,14 @@ type Props = {
 	workout: WorkoutTypes;
 	workoutDay: string;
 	removeExercise: removeExercise;
+	filter: string;
 };
 
 const WorkoutDay = (props: Props) => {
-	const { workout, workoutDay, removeExercise } = props;
+	const { workout, workoutDay, removeExercise, filter: filterValue } = props;
+	const filteredWorkouts = Object.keys(workout).filter(exercise =>
+		exercise.toLowerCase().includes(filterValue)
+	);
 	return (
 		<div className="workoutDayWrapper">
 			<div className="card">
@@ -19,6 +23,7 @@ const WorkoutDay = (props: Props) => {
 						workout={workout}
 						workoutDay={workoutDay}
 						removeExercise={removeExercise}
+						filteredWorkouts={filteredWorkouts}
 					/>
 				</div>
 			</div>

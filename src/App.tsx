@@ -9,7 +9,6 @@ import AddWorkout from './components/AddWorkout/AddWorkout';
 import EditWorkout from './components/EditWorkout/EditWorkout';
 import { ReactComponent as Loading } from './assets/loading.svg';
 import Login from './components/Login';
-import { exercises } from './exercises';
 
 class App extends Component<{}, AppState> {
 	state = {
@@ -79,7 +78,8 @@ class App extends Component<{}, AppState> {
 				bestWorkout: {},
 				loading: false
 			},
-			auth: false
+			auth: false,
+			filtered: []
 		};
 		this.setState({
 			...initialStore
