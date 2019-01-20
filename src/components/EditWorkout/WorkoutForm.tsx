@@ -1,6 +1,6 @@
 import React, { Component, createRef } from 'react';
 import { findDOMNode } from 'react-dom';
-import { exercises } from '../../App';
+import { exercises } from '../../exercises';
 import WeightsForm from './WeightsForm';
 import RepsForm from './RepsForm';
 
