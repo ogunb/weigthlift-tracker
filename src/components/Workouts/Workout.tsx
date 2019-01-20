@@ -6,13 +6,16 @@ type Props = {
 	workout: WorkoutTypes;
 	removeExercise: removeExercise;
 	workoutDay: string;
+	filteredWorkouts: string[];
 };
 
 function Workout(props: Props) {
-	const { workout, removeExercise, workoutDay } = props;
+	const { workout, removeExercise, workoutDay, filteredWorkouts } = props;
+
 	function onRemove(exercise: string) {
 		removeExercise(exercise, workoutDay);
 	}
+
 	return (
 		<div>
 			<table className="table table-sm table-striped table-bordered mt-4">
@@ -27,30 +30,32 @@ function Workout(props: Props) {
 				</thead>
 				<tbody>
 					{Object.keys(workout).map(exercise => {
-						const currExercise = workout[exercise];
-						if (currExercise.isPyramid) {
-							return currExercise.sets.map(
-								(weightAndRep: number[], index: number) => (
-									<PyramidExercise
-										exercise={exercise}
-										weightAndRep={weightAndRep}
-										index={index}
-										key={`${exercise}${index}`}
-										onRemove={onRemove}
-										workoutDay={workoutDay}
-									/>
-								)
+						if (filteredWorkouts.includes(exercise)) {
+							const currExercise = workout[exercise];
+							if (currExercise.isPyramid) {
+								return currExercise.sets.map(
+									(weightAndRep: number[], index: number) => (
+										<PyramidExercise
+											exercise={exercise}
+											weightAndRep={weightAndRep}
+											index={index}
+											key={`${exercise}${index}`}
+											onRemove={onRemove}
+											workoutDay={workoutDay}
+										/>
+									)
+								);
+							}
+							return (
+								<Exercise
+									key={exercise}
+									exercise={exercise}
+									currExercise={workout[exercise]}
+									onRemove={onRemove}
+									workoutDay={workoutDay}
+								/>
 							);
 						}
-						return (
-							<Exercise
-								key={exercise}
-								exercise={exercise}
-								currExercise={workout[exercise]}
-								onRemove={onRemove}
-								workoutDay={workoutDay}
-							/>
-						);
 					})}
 				</tbody>
 			</table>
