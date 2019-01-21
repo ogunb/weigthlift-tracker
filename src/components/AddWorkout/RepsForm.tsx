@@ -10,7 +10,7 @@ class RepsForm extends Component {
 				<input
 					type="number"
 					className="form-control form-control-lg"
-					defaultValue="10"
+					defaultValue="8"
 					required
 				/>
 			</div>
