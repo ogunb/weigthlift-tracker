@@ -48,7 +48,7 @@ export class EditWorkout extends Component<any, EditWorkoutState> {
 				<>
 					<Header />
 					<div className="container">
-						<h3 className="text-center">Yeni Egzersiz</h3>
+						<h3 className="text-center">New Exercise</h3>
 						<WorkoutForm
 							isPyramid={isPyramid}
 							onNewWorkout={this.handleNewWorkout}
@@ -66,7 +66,7 @@ export class EditWorkout extends Component<any, EditWorkoutState> {
 				<>
 					<Header />
 					<div className="container">
-						<h3 className="text-center">Yeni Egzersiz</h3>
+						<h3 className="text-center">New Exercise</h3>
 						<WorkoutForm
 							isPyramid={isPyramid}
 							onNewWorkout={this.handleNewWorkout}
@@ -83,21 +83,21 @@ export class EditWorkout extends Component<any, EditWorkoutState> {
 			<>
 				<Header />
 				<div className="container">
-					<h3 className="text-center">Yeni Egzersiz</h3>
+					<h3 className="text-center">New Exercise</h3>
 					<div className="container d-flex flex-column ">
 						<button
 							className="btn btn-block btn-lg mt-3 btn-primary"
 							onClick={this.changePyramid}
 							data-pyramid={false}
 						>
-							Egzersiz Ekle
+							Add New Exercise
 						</button>
 						<button
 							className="btn btn-block btn-lg mt-3 btn-outline-danger"
 							onClick={this.changePyramid}
 							data-pyramid={true}
 						>
-							Piramit Egzersiz Ekle
+							Add New Exercise (Pyramid)
 						</button>
 					</div>
 				</div>

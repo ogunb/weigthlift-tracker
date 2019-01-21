@@ -4,7 +4,6 @@ import 'firebase/auth';
 import WorkoutDay from './WorkoutDay';
 import Nav from '../Nav';
 import Header from '../Header';
-import { exercises } from '../../exercises';
 
 type Props = {
 	workouts: WorkoutsType;
@@ -41,10 +40,10 @@ export class AllWorkouts extends Component<Props, { filtered: string }> {
 				<div className="container-fluid">
 					<div className="container">
 						<Header />
-						<h2 className="mb-3 mt-4 text-center">Tüm Antrenmanlar</h2>
+						<h2 className="mb-3 mt-4 text-center">All Workouts</h2>
 						<div className="input-group mt-3 mb-3">
 							<div className="input-group-append">
-								<span className="input-group-text">Filtrele</span>
+								<span className="input-group-text">Filter Workout</span>
 							</div>
 							<input
 								type="text"
@@ -75,7 +74,7 @@ export class AllWorkouts extends Component<Props, { filtered: string }> {
 			<>
 				<Header />
 				<h2 className="text-center mt-5">
-					Antrenman eklemek için aşağıdaki + butonunu kullanın.
+					Click the "+" button to add your first exercise!
 				</h2>
 				<Nav />
 			</>

@@ -21,7 +21,7 @@ const PyramidExercise = (props: Props) => {
 			<td className="text-capitalize font-weight-bold">{exercise}</td>
 			<td>{weightAndRep[0]}kg</td>
 			<td>{weightAndRep[1]}</td>
-			<td>Piramit {index + 1}</td>
+			<td>Pyramid {index + 1}</td>
 			<td className="d-sm-flex flex-row ">
 				<Link to={`/edit/${workoutDay}/${exercise}`} className="remove-wrapper">
 					<Edit className="remove" />

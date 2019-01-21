@@ -5,7 +5,7 @@ class RepsForm extends Component {
 		return (
 			<div className="input-group mt-3">
 				<div className="input-group-append">
-					<span className="input-group-text">Tekrar</span>
+					<span className="input-group-text">Rep</span>
 				</div>
 				<input
 					type="number"

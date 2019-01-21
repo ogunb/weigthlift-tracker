@@ -5,7 +5,7 @@ class WeightsForm extends Component {
 		return (
 			<div className="input-group mt-3">
 				<div className="input-group-append">
-					<span className="input-group-text">Ağırlık</span>
+					<span className="input-group-text">Weight</span>
 				</div>
 				<input
 					type="number"

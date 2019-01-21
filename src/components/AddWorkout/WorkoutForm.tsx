@@ -14,14 +14,6 @@ type FormProp = {
 	onNewWorkout: (newWorkout: WorkoutsType) => void;
 };
 
-const getSuggestions = (value: string): string[] => {
-	const inputValue = value.trim().toLowerCase();
-	const inputLength = inputValue.length;
-	return inputLength === 0
-		? []
-		: exercises.filter((ex: string) => ex.toLowerCase().includes(inputValue));
-};
-
 export class WorkoutForm extends Component<FormProp, FormState> {
 	state = {
 		value: '',
@@ -32,24 +24,20 @@ export class WorkoutForm extends Component<FormProp, FormState> {
 	private date = createRef<HTMLInputElement>();
 	private set = createRef<HTMLInputElement>();
 
+	getSuggestions = (value: string): string[] => {
+		const inputValue = value.trim().toLowerCase();
+		const inputLength = inputValue.length;
+		return inputLength === 0
+			? []
+			: exercises.filter((ex: string) => ex.toLowerCase().includes(inputValue));
+	};
+
 	onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { value } = e.target;
-		const suggestions = getSuggestions(value);
+		const suggestions = this.getSuggestions(value);
 		this.setState({
 			value,
 			suggestions
-		});
-	};
-
-	onSuggestionsFetchRequested = ({ value }: { value: string }) => {
-		this.setState({
-			suggestions: getSuggestions(value)
-		});
-	};
-
-	onSuggestionsClearRequested = () => {
-		this.setState({
-			suggestions: []
 		});
 	};
 
@@ -122,11 +110,11 @@ export class WorkoutForm extends Component<FormProp, FormState> {
 		return (
 			<form onSubmit={this.submitForm}>
 				<div className="form-group position-relative">
-					<label htmlFor="egzersiz">Egzersiz</label>
+					<label htmlFor="egzersiz">Exercise</label>
 					<input
 						type="text"
 						className="form-control form-control-lg"
-						placeholder="Egzersiz ismini girin..."
+						placeholder="Exercise Name"
 						value={value}
 						onChange={this.onChange}
 						required={true}
@@ -146,7 +134,7 @@ export class WorkoutForm extends Component<FormProp, FormState> {
 				</div>
 				<div className="input-group">
 					<div className="input-group-append">
-						<span className="input-group-text">Tarih</span>
+						<span className="input-group-text">Date</span>
 					</div>
 					<input
 						type="date"
@@ -183,14 +171,14 @@ export class WorkoutForm extends Component<FormProp, FormState> {
 							onClick={e => this.onSetChange(e, true)}
 							className="btn btn-block btn-outline-warning btn-sm mt-2"
 						>
-							Set ekle
+							Add Set
 						</button>
 						<button
 							type="button"
 							onClick={e => this.onSetChange(e, false)}
 							className="btn btn-block btn-outline-danger btn-sm mt-2"
 						>
-							Set sil
+							Remove Set
 						</button>
 					</>
 				) : (
@@ -209,7 +197,7 @@ export class WorkoutForm extends Component<FormProp, FormState> {
 					</div>
 				)}
 				<button type="submit" className="btn btn-primary btn-block btn-lg mt-5">
-					Ekle
+					Submit
 				</button>
 			</form>
 		);

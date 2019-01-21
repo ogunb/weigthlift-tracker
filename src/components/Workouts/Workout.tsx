@@ -21,10 +21,10 @@ function Workout(props: Props) {
 			<table className="table table-sm table-striped table-bordered mt-4">
 				<thead>
 					<tr>
-						<td>Egzersiz</td>
-						<th>Ağırlık</th>
-						<th>Tekrar</th>
-						<th>Set</th>
+						<td>Exercise</td>
+						<th>Weight</th>
+						<th>Reps</th>
+						<th>Sets</th>
 						<th>-</th>
 					</tr>
 				</thead>

@@ -78,8 +78,7 @@ class App extends Component<{}, AppState> {
 				bestWorkout: {},
 				loading: false
 			},
-			auth: false,
-			filtered: []
+			auth: false
 		};
 		this.setState({
 			...initialStore

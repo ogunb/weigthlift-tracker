@@ -2,17 +2,21 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Remove } from '../../assets/remove.svg';
 import { ReactComponent as Edit } from '../../assets/pen-solid.svg';
+
 type Props = {
 	exercise: string;
 	currExercise: exercise;
 	onRemove: (exercise: string) => void;
 	workoutDay: string;
 };
+
 function Exercise(props: Props) {
 	const { exercise, currExercise, onRemove, workoutDay } = props;
+
 	function onClick() {
 		onRemove(exercise);
 	}
+
 	return (
 		<tr key={exercise}>
 			<td className="text-capitalize font-weight-bold">{exercise}</td>

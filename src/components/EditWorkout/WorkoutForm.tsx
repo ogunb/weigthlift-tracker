@@ -17,14 +17,6 @@ type FormProp = {
 	onNewWorkout: (newWorkout: WorkoutsType, exercise: string) => void;
 };
 
-const getSuggestions = (value: string): string[] => {
-	const inputValue = value.trim().toLowerCase();
-	const inputLength = inputValue.length;
-	return inputLength === 0
-		? []
-		: exercises.filter((ex: string) => ex.toLowerCase().includes(inputValue));
-};
-
 export class WorkoutForm extends Component<FormProp, FormState> {
 	state = {
 		value: '',
@@ -58,9 +50,17 @@ export class WorkoutForm extends Component<FormProp, FormState> {
 		});
 	}
 
+	getSuggestions = (value: string): string[] => {
+		const inputValue = value.trim().toLowerCase();
+		const inputLength = inputValue.length;
+		return inputLength === 0
+			? []
+			: exercises.filter((ex: string) => ex.toLowerCase().includes(inputValue));
+	};
+
 	onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { value } = e.target;
-		const suggestions = getSuggestions(value);
+		const suggestions = this.getSuggestions(value);
 		this.setState({
 			value,
 			suggestions
@@ -71,8 +71,10 @@ export class WorkoutForm extends Component<FormProp, FormState> {
 		e.preventDefault();
 		const { isPyramid, onNewWorkout } = this.props;
 		const exercise = this.state.value;
+
 		if (!exercises.includes(exercise)) return;
 		const date = this.date.current!.value;
+
 		const sets = [];
 		for (let i = 0; i < this.state.defaultSet; i++) {
 			let weightInput, repInput;
@@ -89,6 +91,7 @@ export class WorkoutForm extends Component<FormProp, FormState> {
 			}
 			sets.push([parseInt(weightInput.value), parseInt(repInput.value)]);
 		}
+
 		const properWorkoutObj: WorkoutsType = {
 			[date]: {
 				[exercise]: {
@@ -97,6 +100,7 @@ export class WorkoutForm extends Component<FormProp, FormState> {
 				}
 			}
 		};
+
 		onNewWorkout(properWorkoutObj, exercise);
 	};
 
@@ -124,6 +128,7 @@ export class WorkoutForm extends Component<FormProp, FormState> {
 	render() {
 		const { suggestions, value, defaultSet } = this.state;
 		const { isPyramid } = this.props;
+
 		const weightAndReps: any[] = [];
 		for (let i = 0; i < defaultSet; i++) {
 			weightAndReps.push(
@@ -133,10 +138,11 @@ export class WorkoutForm extends Component<FormProp, FormState> {
 				</React.Fragment>
 			);
 		}
+
 		return (
 			<form onSubmit={this.submitForm}>
 				<div className="form-group position-relative">
-					<label htmlFor="egzersiz">Egzersiz</label>
+					<label htmlFor="egzersiz">Exercise</label>
 					<input
 						type="text"
 						className="form-control form-control-lg"
@@ -160,7 +166,7 @@ export class WorkoutForm extends Component<FormProp, FormState> {
 				</div>
 				<div className="input-group">
 					<div className="input-group-append">
-						<span className="input-group-text">Tarih</span>
+						<span className="input-group-text">Date</span>
 					</div>
 					<input
 						type="date"
@@ -197,14 +203,14 @@ export class WorkoutForm extends Component<FormProp, FormState> {
 							onClick={e => this.onSetChange(e, true)}
 							className="btn btn-block btn-outline-warning btn-sm mt-2"
 						>
-							Set ekle
+							Add Set
 						</button>
 						<button
 							type="button"
 							onClick={e => this.onSetChange(e, false)}
 							className="btn btn-block btn-outline-danger btn-sm mt-2"
 						>
-							Set sil
+							Remove Set
 						</button>
 					</>
 				) : (
@@ -223,7 +229,7 @@ export class WorkoutForm extends Component<FormProp, FormState> {
 					</div>
 				)}
 				<button type="submit" className="btn btn-primary btn-block btn-lg mt-5">
-					Ekle
+					Submit
 				</button>
 			</form>
 		);
