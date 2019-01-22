@@ -10,6 +10,7 @@ class WeightsForm extends Component {
 				<input
 					type="number"
 					className="form-control form-control-lg"
+					placeholder="...kg"
 					required
 				/>
 			</div>
