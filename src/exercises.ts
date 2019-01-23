@@ -1,4 +1,4 @@
-export const exercises = [
+export const exercises: string[] = [
 	'Arnold Press',
 	'Dumbbell Front Squats',
 	'Barbell Front Squats',
@@ -37,7 +37,7 @@ export const exercises = [
 	'Bent Over Barbell Rows',
 	'Bent Over Dumbbell Rows',
 	'Biceps Curl Machine',
-	'Cable Crossovers/Cable Flyes',
+	'Cable Crossovers (Cable Flyes)',
 	'Cable Curls',
 	'Cable Press-Downs',
 	'Cable Pull-Throughs',
@@ -81,7 +81,7 @@ export const exercises = [
 	'Leg Curls',
 	'Leg Extensions',
 	'Leg Press',
-	'Machine Squat/Hack Squat',
+	'Machine Squat (Hack Squat)',
 	'Overhead Dumbbell Triceps Extensions',
 	'Overhead Barbell Triceps Extensions',
 	'Overhead Machine Press',
